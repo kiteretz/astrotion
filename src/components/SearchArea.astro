@@ -1,0 +1,67 @@
+---
+import type { Post } from "../lib";
+
+export type Props = {
+  posts: Post[];
+};
+
+const { posts } = Astro.props;
+---
+
+<search-area
+  class="js-search block max-w-5xl mx-auto p-3 bg-gray-100"
+  data-posts={JSON.stringify(posts)}
+>
+  <h1>検索</h1>
+  <input
+    class="border border-black"
+    type="text"
+    placeholder="検索内容を入力してください"
+  />
+  <div class="js-results [&_ul]:list-none"></div>
+</search-area>
+
+<script>
+  import type { Post } from "../lib";
+
+  class SearchArea extends HTMLElement {
+    constructor() {
+      super();
+
+      const search = document.querySelector(".js-search");
+      const input = search?.querySelector("input");
+      const results = search?.querySelector(".js-results");
+      const posts = JSON.parse(this.dataset.posts || "[]");
+
+      input?.addEventListener("input", () => {
+        if (!results) return;
+
+        if (input.value.trim() === "") {
+          results.innerHTML = "";
+          return;
+        }
+
+        const hits = posts.filter((p: Post) => {
+          const words = input.value.toLowerCase().split(" ");
+          return words.every((word) => p.title.toLowerCase().includes(word));
+        });
+
+        if (hits.length > 0) {
+          results.innerHTML = "";
+
+          const list = document.createElement("ul");
+          results.appendChild(list);
+
+          hits.forEach((p: Post) => {
+            const item = document.createElement("li");
+            item.innerHTML = `<a href="${`/posts/${p.slug}`}/">${p.title}</a>`;
+            list.appendChild(item);
+          });
+        } else {
+          results.innerHTML = "該当する記事は見つかりませんでした";
+        }
+      });
+    }
+  }
+  customElements.define("search-area", SearchArea);
+</script>
