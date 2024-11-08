@@ -27,6 +27,7 @@ export type Post = {
   cover?: string;
   featuredImage?: string;
   images?: Map<string, string>;
+  category: string;
 };
 
 export type PostContent = {

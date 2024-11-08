@@ -72,6 +72,7 @@ export function buildPost(pageObject: PageObjectResponse): Post {
   if (featuredImageUrl && featuredImageAssetUrl)
     images.set(featuredImageUrl, featuredImageAssetUrl);
 
+	console.log(properties)
   const post: Post = {
     id: id,
     title: getRichText(properties.Page),
@@ -92,6 +93,8 @@ export function buildPost(pageObject: PageObjectResponse): Post {
         ? properties.UpdatedAt.last_edited_time
         : "",
     images,
+    category: properties.Category.type === 'select'
+      ? properties.Category.select?.name ?? '' : ''
   };
 
   return post;

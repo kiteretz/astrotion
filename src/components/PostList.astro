@@ -22,6 +22,7 @@ const { posts } = Astro.props;
         body={p.excerpt}
         image={p.featuredImage || p.cover || postUrl(p.slug + ".webp")}
         date={formatPostDate(p.date)}
+        category={p.category}
       />
     ))
   }
