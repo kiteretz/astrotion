@@ -72,7 +72,6 @@ export function buildPost(pageObject: PageObjectResponse): Post {
   if (featuredImageUrl && featuredImageAssetUrl)
     images.set(featuredImageUrl, featuredImageAssetUrl);
 
-	console.log(properties)
   const post: Post = {
     id: id,
     title: getRichText(properties.Page),
