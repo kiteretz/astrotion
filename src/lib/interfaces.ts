@@ -19,7 +19,7 @@ export type Post = {
   slug: string;
   date: string;
   updatedAt: string;
-  excerpt: string;
+  answer: string;
   tags: Tag[];
   rank: number;
   raw?: any;
