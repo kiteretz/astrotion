@@ -113,8 +113,11 @@ dependencies:
   sharp:
     specifier: ^0.33.4
     version: 0.33.5
+  tailwind-merge:
+    specifier: ^2.5.5
+    version: 2.5.5
   tailwindcss:
-    specifier: ^3.4.4
+    specifier: ^3.4.15
     version: 3.4.15
   unified:
     specifier: ^11.0.4
@@ -6779,6 +6782,10 @@ packages:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
     dev: true
+
+  /tailwind-merge@2.5.5:
+    resolution: {integrity: sha512-0LXunzzAZzo0tEPxV3I297ffKZPlKDrjj7NXphC8V5ak9yHC5zRmxnOe2m/Rd/7ivsOMJe3JZ2JVocoDdQTRBA==}
+    dev: false
 
   /tailwindcss@3.4.15:
     resolution: {integrity: sha512-r4MeXnfBmSOuKUWmXe6h2CcyfzJCEk4F0pptO5jlnYSIViUkVmsawj80N5h2lO3gwcmSb4n3PuN+e+GC1Guylw==}

@@ -1,6 +1,7 @@
 ---
-import Tags from "../components/Tags.astro";
+import Tags from "./Tags.astro";
 import type { Tag } from "../lib";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   title: string;
@@ -10,12 +11,22 @@ type Props = {
   category?: string;
   tags?: Tag[];
   answer: string;
+  className?: string;
 };
 
-const { href, title, image, date: date, category, tags, answer } = Astro.props;
+const {
+  href,
+  title,
+  image,
+  date: date,
+  category,
+  tags,
+  answer,
+  className,
+} = Astro.props;
 ---
 
-<div class="col-span-1">
+<div class={twMerge("col-span-1", className)}>
   <div
     class="transition-all duration-75 ease-in-out h-full relative top-0 hover:-top-2 shadow-lg hover:shadow-xl bg-white rounded-xl overflow-hidden grid"
   >
