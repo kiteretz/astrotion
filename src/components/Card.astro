@@ -1,4 +1,6 @@
 ---
+import { twMerge } from "tailwind-merge";
+
 type Props = {
   title: string;
   href: string;
@@ -6,12 +8,21 @@ type Props = {
   date?: string;
   category?: string;
   answer: string;
+  className?: string;
 };
 
-const { href, title, image, date: date, category, answer } = Astro.props;
+const {
+  href,
+  title,
+  image,
+  date: date,
+  category,
+  answer,
+  className,
+} = Astro.props;
 ---
 
-<div class="col-span-1">
+<div class={twMerge("col-span-1", className)}>
   <a
     href={href}
     class="transition-all duration-75 ease-in-out h-full block relative top-0 hover:-top-2 shadow-lg hover:shadow-xl bg-white rounded-xl overflow-hidden">
