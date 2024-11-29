@@ -1,6 +1,7 @@
 ---
 import Pagination from "../components/Pagination.astro";
 import PostList from "../components/PostList.astro";
+import SearchForm from "../components/SearchForm.astro";
 import config from "../config";
 import Layout from "../layouts/Layout.astro";
 import { client } from "../lib";
@@ -9,16 +10,25 @@ const { database, pageCount, pageInt, posts } = await client.listPosts("1");
 ---
 
 <Layout>
-  <main class="py-12 lg:py-20">
+  <main>
+    <div class="bg-neutral-100 pt-[9.5rem] pb-[11.5rem]">
+      <div class="max-w-container mx-auto">
+        <h1 class="text-[2.25rem]/[1.33] font-bold">
+          ウェブデベロッパー、<br />
+          デザイナーのための百科事典
+        </h1>
+        <SearchForm />
+      </div>
+    </div>
     <article class="max-w-6xl mx-auto px-3">
-      <header class="text-center mb-12">
+      <!-- <header class="text-center mb-12">
         <h1 class:list={["mb-12 text-6xl title", config.index?.titleClasses]}>
           {database.title}
         </h1>
         <p class="mx-auto max-w-xl">
           {database.description}
         </p>
-      </header>
+      </header> -->
       <PostList posts={posts} />
       <Pagination page={pageInt} pageCount={pageCount} />
     </article>

@@ -1,12 +1,13 @@
 ---
 import config from "../config";
+import { twMerge } from "tailwind-merge";
 import { client, getUrl } from "../lib";
 
 const database = await client.getDatabase();
 ---
 
-<nav class:list={[config.nav?.classes]}>
-  <div
+<nav class={twMerge("", config.nav?.classes)}>
+  <!-- <div
     class="max-w-5xl mx-auto px-3 py-3 flex items-center justify-between h-16"
   >
     <a
@@ -14,8 +15,35 @@ const database = await client.getDatabase();
       class:list={["text-xl title", config.nav?.titleClasses]}
       >{database.title}</a
     >
-  </div>
+  </div> -->
+  <ul class="text-[16px]/[1.25] flex items-center">
+    {
+      [
+        {
+          label: "HTML",
+          href: "#",
+        },
+        {
+          label: "CSS",
+          href: "#",
+        },
+        {
+          label: "JavaScript",
+          href: "#",
+        },
+      ].map(({ label, href }) => {
+        return (
+          <li class="flex justify-center items-center">
+            <a href={href} class="px-4 py-2.5">
+              {label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
 </nav>
+
 <style
   define:vars={{
     titleFontFamily: config.nav?.titleFontFamily || "inherit",

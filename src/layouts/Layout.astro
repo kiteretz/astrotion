@@ -4,7 +4,8 @@ import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import "prismjs/themes/prism.min.css";
 import "katex/dist/katex.min.css";
 
-import Nav from "../components/Nav.astro";
+// import Nav from "../components/Nav.astro";
+import Header from "../components/Header.astro";
 import config from "../config";
 import { PUBLIC_GA_TRACKING_ID } from "../constants";
 import { client, getUrl } from "../lib";
@@ -34,7 +35,7 @@ const siteDescription = description ? description : database.description;
 const siteURL = canonicalUrl ? new URL(canonicalUrl) : Astro.url;
 const siteOGImage = getUrl(
   database.cover || config.og?.siteImagePath || "og-image.png",
-  Astro.site,
+  Astro.site
 );
 ---
 
@@ -78,9 +79,9 @@ const siteOGImage = getUrl(
     class:list={[
       "bg-white text-black font-body leading-normal body",
       config.body?.classes,
-    ]}
-  >
-    <Nav />
+    ]}>
+    <Header />
+    <!-- <Nav /> -->
     <slot />
     {
       config.footer?.content && (
@@ -88,8 +89,7 @@ const siteOGImage = getUrl(
           class:list={[
             "text-xs text-gray-600 text-center",
             config.footer?.classes,
-          ]}
-        >
+          ]}>
           <p class="max-w-5xl mx-auto px-6 py-6">{config.footer?.content}</p>
         </footer>
       )
