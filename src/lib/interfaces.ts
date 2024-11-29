@@ -19,7 +19,7 @@ export type Post = {
   slug: string;
   date: string;
   updatedAt: string;
-  excerpt: string;
+  answer: string;
   tags: Tag[];
   rank: number;
   raw?: any;
@@ -27,6 +27,7 @@ export type Post = {
   cover?: string;
   featuredImage?: string;
   images?: Map<string, string>;
+  category: string;
 };
 
 export type PostContent = {

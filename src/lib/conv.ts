@@ -85,13 +85,15 @@ export function buildPost(pageObject: PageObjectResponse): Post {
       properties.Tags.type === "multi_select"
         ? properties.Tags.multi_select
         : [],
-    excerpt: getRichText(properties.Excerpt),
+    answer: getRichText(properties.Answer),
     rank: properties.Rank.type === "number" ? properties.Rank.number ?? 0 : 0,
     updatedAt:
       properties.UpdatedAt.type === "last_edited_time"
         ? properties.UpdatedAt.last_edited_time
         : "",
     images,
+    category: properties.Category.type === 'select'
+      ? properties.Category.select?.name ?? '' : ''
   };
 
   return post;

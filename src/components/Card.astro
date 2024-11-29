@@ -5,9 +5,11 @@ type Props = {
   href: string;
   image?: string;
   date?: string;
+  category?: string;
+  answer: string
 };
 
-const { href, title, body, image, date: date } = Astro.props;
+const { href, title, body, image, date: date, category, answer } = Astro.props;
 ---
 
 <div class="col-span-1">
@@ -21,6 +23,8 @@ const { href, title, body, image, date: date } = Astro.props;
       <h2 class="font-bold text-2xl leading-tight">
         {title}
       </h2>
+      <p>{answer}</p>
+      <p>{category}</p>
       <p class="text-xs text-gray-600 mt-4">
         {body}
       </p>

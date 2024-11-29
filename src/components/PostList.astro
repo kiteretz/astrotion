@@ -19,9 +19,10 @@ const { posts } = Astro.props;
       <Card
         href={postUrl(p.slug)}
         title={p.title}
-        body={p.excerpt}
-        image={p.featuredImage || p.cover || postUrl(p.slug + ".webp")}
+        image={p.featuredImage || p.cover }
         date={formatPostDate(p.date)}
+        category={p.category}
+        answer={p.answer}
       />
     ))
   }
