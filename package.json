@@ -71,6 +71,7 @@
     "eslint": "^9.4.0",
     "eslint-config-reearth": "^0.3.5",
     "eslint-plugin-astro": "^1.2.0",
+    "eslint-plugin-tailwindcss": "^3.17.5",
     "prettier": "^3.3.1",
     "prettier-plugin-astro": "^0.14.0",
     "symlink-dir": "^6.0.0",
