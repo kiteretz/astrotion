@@ -11,9 +11,12 @@ const { tags, base = "" } = Astro.props;
 
 {
   tags.length === 0 ? null : (
-    <div class="flex space-x-2 pt-6">
+    <div class="flex space-x-2">
       {tags.map((tag) => (
-        <a href={`${base}/tags/${tag.name}/`} class="hover:underline">
+        <a
+          href={`${base}/tags/${tag.name}/`}
+          class="pointer-events-auto hover:underline"
+        >
           #{tag.name}
         </a>
       ))}
