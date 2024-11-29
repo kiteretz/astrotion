@@ -11,15 +11,12 @@ const { tags, base = "" } = Astro.props;
 
 {
   tags.length === 0 ? null : (
-    <section class="flex space-x-2 pt-6">
+    <div class="flex space-x-2 pt-6">
       {tags.map((tag) => (
-        <a
-          href={`${base}/tags/${tag.name}/`}
-          class="px-2.5 py-0.5 rounded border border-black hover:underline"
-        >
-          {tag.name}
+        <a href={`${base}/tags/${tag.name}/`} class="hover:underline">
+          #{tag.name}
         </a>
       ))}
-    </section>
+    </div>
   )
 }

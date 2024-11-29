@@ -1,33 +1,52 @@
 ---
+import Tags from "./Tags.astro";
+import type { Tag } from "../lib";
+import { twMerge } from "tailwind-merge";
+
 type Props = {
   title: string;
-  body: string;
   href: string;
   image?: string;
   date?: string;
   category?: string;
-  answer: string
+  tags?: Tag[];
+  answer: string;
+  className?: string;
 };
 
-const { href, title, body, image, date: date, category, answer } = Astro.props;
+const {
+  href,
+  title,
+  image,
+  date: date,
+  category,
+  tags,
+  answer,
+  className,
+} = Astro.props;
 ---
 
-<div class="col-span-1">
-  <a
-    href={href}
-    class="transition-all duration-75 ease-in-out h-full block relative top-0 hover:-top-2 shadow-lg hover:shadow-xl bg-white rounded-xl overflow-hidden"
+<div class={twMerge("col-span-1", className)}>
+  <div
+    class="transition-all duration-75 ease-in-out h-full relative top-0 hover:-top-2 shadow-lg hover:shadow-xl bg-white rounded-xl overflow-hidden grid"
   >
-    {image && <img src={image} alt={title} class="aspect-video object-cover" />}
     <div class="py-6 px-8">
-      {date && <p class="text-xs text-gray-600 mb-2">{date}</p>}
-      <h2 class="font-bold text-2xl leading-tight">
-        {title}
-      </h2>
-      <p>{answer}</p>
-      <p>{category}</p>
-      <p class="text-xs text-gray-600 mt-4">
-        {body}
-      </p>
+      <a href={href} class="grid-row-[1/3] grid-col-[1]">
+        {
+          image && (
+            <img src={image} alt={title} class="aspect-video object-cover" />
+          )
+        }
+        {date && <p class="text-xs text-gray-600 mb-2">{date}</p>}
+        <h2 class="font-bold text-2xl leading-tight">
+          {title}
+        </h2>
+        <p>{answer}</p>
+      </a>
+      <div class="grid-row-[2/3] grid-col-[1]">
+        <p>{category}</p>
+        {tags && <Tags tags={tags} />}
+      </div>
     </div>
-  </a>
+  </div>
 </div>
