@@ -1,7 +1,7 @@
 ---
 import Tags from "./Tags.astro";
 import type { Tag } from "../lib";
-import { twMerge } from "tailwind-merge";
+import { twJoin } from "tailwind-merge";
 
 type Props = {
   title: string;
@@ -26,27 +26,68 @@ const {
 } = Astro.props;
 ---
 
-<div class={twMerge("col-span-1", className)}>
+<div class="group [perspective:1000px]">
   <div
-    class="transition-all duration-75 ease-in-out h-full relative top-0 hover:-top-2 shadow-lg hover:shadow-xl bg-white rounded-xl overflow-hidden grid"
+    class="group grid h-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] [&>*]:col-span-full [&>*]:row-span-full"
   >
-    <div class="py-6 px-8">
-      <a href={href} class="grid-row-[1/3] grid-col-[1]">
-        {
-          image && (
-            <img src={image} alt={title} class="aspect-video object-cover" />
-          )
-        }
-        {date && <p class="text-xs text-gray-600 mb-2">{date}</p>}
-        <h2 class="font-bold text-2xl leading-tight">
-          {title}
-        </h2>
-        <p>{answer}</p>
-      </a>
-      <div class="grid-row-[2/3] grid-col-[1]">
-        <p>{category}</p>
-        {tags && <Tags tags={tags} />}
+    <div
+      class={twJoin(
+        "relative top-0 h-full overflow-hidden rounded-xl border bg-white shadow-lg transition-all duration-75 ease-in-out hover:-top-2 hover:shadow-xl",
+        className
+      )}
+    >
+      <div
+        class={twJoin(
+          "grid gap-2 h-full grid-rows-[repeat(3,auto)_1fr] items-start overflow-hidden",
+          image
+            ? "grid-rows-[repeat(5,auto)_1fr]"
+            : "grid-rows-[repeat(4,auto)_1fr]"
+        )}
+      >
+        <a
+          href={href}
+          class={twJoin(
+            "col-[1] grid grid-rows-subgrid h-full p-5",
+            image ? "row-[1/7]" : "row-[1/6]"
+          )}
+        >
+          <div
+            class="inline-block w-fit rounded-[0.25rem] border px-1.5 py-0.5 text-xs font-medium text-gray-600"
+          >
+            {category}
+          </div>
+          {
+            image && (
+              <div class="aspect-[3/2] rounded-lg overflow-hidden">
+                <img
+                  class="object-cover w-full h-full"
+                  src={image}
+                  alt={title}
+                />
+              </div>
+            )
+          }
+          <h2 class="font-bold text-2xl leading-tight">
+            {title}
+          </h2>
+          <p>{answer}</p>
+        </a>
+        <div
+          class={twJoin(
+            "col-[1] pointer-events-none p-5 pt-0",
+            image ? "row-[6/7]" : "row-[5/6]"
+          )}
+        >
+          {date && <p class="text-xs text-gray-600 mb-2">{date}</p>}
+          {tags && <Tags tags={tags} />}
+        </div>
       </div>
+    </div>
+    <div
+      class="absolute inset-0 grid place-items-center bg-white [backface-visibility:hidden] [transform:rotateY(180deg)]"
+    >
+      {answer}
+      <a href={href} class="text-blue-500 underline"> Read more</a>
     </div>
   </div>
 </div>
