@@ -1,16 +1,22 @@
 ---
 import { twMerge } from "tailwind-merge";
+
+type Props = {
+  className?: string;
+};
+
+const { className } = Astro.props;
 ---
 
 <form action="">
-  <label for="">
+  <label for="" class={twMerge("flex relative", className)}>
     <input
       type="search"
       placeholder="サイト内を検索..."
       name="search"
       class="w-full border border-solid border-black rounded bg-white px-4 py-2"
     />
-    <button
+    <button class="absolute inset-y-0 right-4"
       ><svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

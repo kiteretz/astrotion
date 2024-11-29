@@ -3,10 +3,15 @@ import config from "../config";
 import { twMerge } from "tailwind-merge";
 import { client, getUrl } from "../lib";
 
+type Props = {
+  className?: string;
+};
+
 const database = await client.getDatabase();
+const { className } = Astro.props;
 ---
 
-<nav class={twMerge("", config.nav?.classes)}>
+<nav class={twMerge("", config.nav?.classes, className)}>
   <!-- <div
     class="max-w-5xl mx-auto px-3 py-3 flex items-center justify-between h-16"
   >
