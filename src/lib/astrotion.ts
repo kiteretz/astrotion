@@ -94,7 +94,7 @@ export class Client implements ClientType {
   async getAllCategories(): Promise<string[]> {
     const posts = await this.getAllPosts();
     const cats = new Set<string>();
-    posts.forEach((post) => cats.add(post.category.toLowerCase()));
+    posts.forEach((post) => cats.add(post.category));
     return Array.from(cats);
   }
 
