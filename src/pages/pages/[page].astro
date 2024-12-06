@@ -16,14 +16,14 @@ export async function getStaticPaths() {
 
 const { page } = Astro.params;
 const { database, pageCount, pageInt, posts } = await client.listPosts(
-  page || "1",
+  page || "1"
 );
 ---
 
 <Layout>
   <main class="py-12 lg:py-20">
-    <article class="max-w-6xl mx-auto px-3">
-      <header class="text-center mb-12">
+    <article class="mx-auto max-w-6xl px-3">
+      <header class="mb-12 text-center">
         <h1 class:list={["mb-12 text-6xl title", config.index?.titleClasses]}>
           {database.title}
         </h1>

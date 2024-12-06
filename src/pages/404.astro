@@ -5,11 +5,10 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <main class="py-12 lg:py-20">
-    <article class="max-w-6xl mx-auto px-3">
-      <header class="text-center mb-12">
+    <article class="mx-auto max-w-6xl px-3">
+      <header class="mb-12 text-center">
         <h1
-          class:list={["mb-12 text-6xl title", config.notFound?.titleClasses]}
-        >
+          class:list={["mb-12 text-6xl title", config.notFound?.titleClasses]}>
           {config.notFound?.title || "404 Not Found"}
         </h1>
         <p class="mx-auto max-w-xl">

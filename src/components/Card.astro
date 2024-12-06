@@ -33,7 +33,7 @@ const {
     <div
       class={twJoin(
         "relative h-full overflow-hidden rounded-xl border bg-white shadow-lg transition-all duration-75 ease-in-out hover:shadow-xl",
-        className
+        className,
       )}
     >
       <div
@@ -41,33 +41,29 @@ const {
           "grid gap-2 h-full grid-rows-[repeat(3,auto)_1fr] items-start overflow-hidden",
           image
             ? "grid-rows-[repeat(5,auto)_1fr]"
-            : "grid-rows-[repeat(4,auto)_1fr]"
+            : "grid-rows-[repeat(4,auto)_1fr]",
         )}
       >
         <a
           href={href}
           class={twJoin(
             "col-[1] grid grid-rows-subgrid h-full p-5",
-            image ? "row-[1/7]" : "row-[1/6]"
+            image ? "row-[1/7]" : "row-[1/6]",
           )}
         >
           <div
-            class="inline-block w-fit rounded-[0.25rem] border px-1.5 py-0.5 text-xs font-medium text-gray-600"
+            class="inline-block w-fit rounded border px-1.5 py-0.5 text-xs font-medium text-gray-600"
           >
             {category}
           </div>
           {
             image && (
-              <div class="aspect-[3/2] rounded-lg overflow-hidden">
-                <img
-                  class="object-cover w-full h-full"
-                  src={image}
-                  alt={title}
-                />
+              <div class="aspect-[3/2] overflow-hidden rounded-lg">
+                <img class="size-full object-cover" src={image} alt={title} />
               </div>
             )
           }
-          <h2 class="font-bold text-2xl leading-tight">
+          <h2 class="text-2xl font-bold leading-tight">
             {title}
           </h2>
           <p>{answer}</p>
@@ -75,16 +71,16 @@ const {
         <div
           class={twJoin(
             "col-[1] pointer-events-none p-5 pt-0",
-            image ? "row-[6/7]" : "row-[5/6]"
+            image ? "row-[6/7]" : "row-[5/6]",
           )}
         >
-          {date && <p class="text-xs text-gray-600 mb-2">{date}</p>}
+          {date && <p class="mb-2 text-xs text-gray-600">{date}</p>}
           {tags && <Tags tags={tags} />}
         </div>
       </div>
     </div>
     <div
-      class="absolute inset-0 grid p-5 rounded-xl border place-items-center bg-white [backface-visibility:hidden] [transform:rotateY(180deg)]"
+      class="absolute inset-0 grid place-items-center rounded-xl border bg-white p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]"
     >
       {answer}
       <a

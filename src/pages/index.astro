@@ -11,16 +11,16 @@ const { database, pageCount, pageInt, posts } = await client.listPosts("1");
 
 <Layout>
   <main>
-    <div class="bg-neutral-100 pt-[9.5rem] pb-[11.5rem]">
-      <div class="max-w-container mx-auto">
+    <div class="bg-neutral-100 pb-[11.5rem] pt-[9.5rem]">
+      <div class="mx-auto max-w-container">
         <h1 class="text-[2.25rem]/[1.33] font-bold">
           ウェブデベロッパー、<br />
           デザイナーのための百科事典
         </h1>
-        <SearchForm className="w-[29.1875rem] mt-6" />
+        <SearchForm className="mt-6 w-[29.1875rem]" />
       </div>
     </div>
-    <article class="max-w-6xl mx-auto px-3">
+    <article class="mx-auto max-w-6xl px-3">
       <!-- <header class="text-center mb-12">
         <h1 class:list={["mb-12 text-6xl title", config.index?.titleClasses]}>
           {database.title}

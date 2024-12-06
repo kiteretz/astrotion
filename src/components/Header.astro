@@ -6,7 +6,7 @@ import SearchForm from "./SearchForm.astro";
 ---
 
 <header class="border-b border-solid border-black">
-  <div class="max-w-container mx-auto px-4 py-3 flex md:gap-6 items-center">
+  <div class="mx-auto flex max-w-container items-center px-4 py-3 md:gap-6">
     <div class={twMerge("", config.index?.titleClasses)}>
       <!-- {database.title} -->
       <a href="#" class="duration-300 hover:opacity-60">
@@ -14,7 +14,8 @@ import SearchForm from "./SearchForm.astro";
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 111 28"
-          class="w-[111px] aspect-[111/28]">
+          class="aspect-[111/28] w-[111px]"
+        >
           <g clip-path="url(#a)">
             <path
               fill="#000"
@@ -30,6 +31,6 @@ import SearchForm from "./SearchForm.astro";
       </a>
     </div>
     <Nav className="grow" />
-    <SearchForm className="w-[20rem]" />
+    <SearchForm className="w-80" />
   </div>
 </header>

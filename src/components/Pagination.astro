@@ -46,7 +46,7 @@ const prevPage: number | undefined = page > 1 ? page - 1 : undefined;
 const nextPage: number | undefined = page < pageCount ? page + 1 : undefined;
 ---
 
-<section class="flex space-x-8 justify-center text-xl pt-16 font-bold">
+<section class="flex justify-center space-x-8 pt-16 text-xl font-bold">
   {prevPage && <a href={getPageUrl(prevPage, base)}>&larr; Prev</a>}
   {
     pages.map((p) =>
