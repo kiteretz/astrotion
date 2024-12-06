@@ -1,9 +1,9 @@
-import configs from "eslint-config-reearth";
+// import configs from "eslint-config-reearth";
 import eslintPluginAstro from "eslint-plugin-astro";
 import tailwind from "eslint-plugin-tailwindcss";
 
 export default [
-  ...configs,
+  // ...configs,
   ...eslintPluginAstro.configs.recommended,
   ...tailwind.configs["flat/recommended"],
   {
