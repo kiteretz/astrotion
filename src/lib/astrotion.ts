@@ -91,6 +91,13 @@ export class Client implements ClientType {
     return Array.from(tags);
   }
 
+  async getAllCategories(): Promise<string[]> {
+    const posts = await this.getAllPosts();
+    const cats = new Set<string>();
+    posts.forEach((post) => cats.add(post.category.toLowerCase()));
+    return Array.from(cats);
+  }
+
   async getDatabase(): Promise<Database> {
     const res = await this.client.databases.retrieve({
       database_id: this.databaseId,

@@ -1,56 +1,36 @@
 ---
-import Pagination from "../../../../components/Pagination.astro";
-import PostList from "../../../../components/PostList.astro";
 import config from "../../../../config";
-import Layout from "../../../../layouts/Layout.astro";
+import TaxonomyMain from "../../../../layouts/TaxonomyMain.astro";
 import { client } from "../../../../lib";
 
 export async function getStaticPaths() {
   const posts = await client.getAllPosts();
-  const tags = new Map<string, number>();
-  posts.forEach((post) =>
-    post.tags.forEach((tag) => {
-      tags.set(tag.name, (tags.get(tag.name) || 0) + 1);
-    }),
-  );
+  const cats = new Map<string, number>();
+  posts.forEach((post) => {
+      post.category &&
+      cats.set(post.category, (cats.get(post.category) || 0) + 1);
+  });
 
-  return Array.from(tags).flatMap(([name, count]) => {
+  return Array.from(cats).flatMap(([name, count]) => {
     const pageCount = Math.ceil(count / (config.postsPerPage || 20));
     return Array.from({ length: pageCount }, (_, i) => ({
-      params: { tag: name, page: (i + 1).toString() },
+      params: { category: name, page: (i + 1).toString() },
     }));
   });
 }
 
-const { page, tag } = Astro.params;
-const { database, pageCount, pageInt, posts } = await client.listPosts(
+const { page, category } = Astro.params;
+const { pageCount, pageInt, posts } = await client.listPosts(
   page || "1",
-  (post) => post.tags.some((t) => t.name === tag),
+  (post) => post.category === category,
 );
 ---
 
-<Layout rssUrl=`/tags/${tag}/rss.xml`>
-  <main class="py-12 lg:py-20">
-    <article class="max-w-6xl mx-auto px-3">
-      <header class="text-center mb-12">
-        <h1 class:list={["mb-12 text-6xl title", config.index?.titleClasses]}>
-          {database.title}
-        </h1>
-        <p class="mx-auto max-w-xl">
-          {tag} - Page {pageInt} of {pageCount}
-        </p>
-      </header>
-      <PostList posts={posts} />
-      <Pagination page={pageInt} pageCount={pageCount} base={`/tags/${tag}`} />
-    </article>
-  </main>
-</Layout>
-<style
-  define:vars={{
-    titleFontFamily: config.index?.titleFontFamily || "inherit",
-  }}
->
-  .title {
-    font-family: var(--titleFontFamily);
-  }
-</style>
+<TaxonomyMain
+  taxonomy={"category"}
+  term={category}
+  siteTitle={"hyacker"}
+  pageInt={pageInt}
+  pageCount={pageCount}
+  posts={posts}
+/>
