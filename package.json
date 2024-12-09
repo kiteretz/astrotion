@@ -76,6 +76,7 @@
     "prettier-plugin-astro": "^0.14.0",
     "symlink-dir": "^6.0.0",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^8.17.0",
     "vitest": "^1.6.0"
   },
   "packageManager": "pnpm@8.8.0+sha1.9922e8b650d393700209ccd81e0ebdbcbe43b0d3"

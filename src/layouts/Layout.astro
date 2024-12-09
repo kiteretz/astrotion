@@ -35,7 +35,7 @@ const siteDescription = description ? description : database.description;
 const siteURL = canonicalUrl ? new URL(canonicalUrl) : Astro.url;
 const siteOGImage = getUrl(
   database.cover || config.og?.siteImagePath || "og-image.png",
-  Astro.site
+  Astro.site,
 );
 ---
 
@@ -79,7 +79,8 @@ const siteOGImage = getUrl(
     class:list={[
       "bg-white text-black font-body leading-normal body",
       config.body?.classes,
-    ]}>
+    ]}
+  >
     <Header />
     <!-- <Nav /> -->
     <slot />
@@ -89,8 +90,9 @@ const siteOGImage = getUrl(
           class:list={[
             "text-xs text-gray-600 text-center",
             config.footer?.classes,
-          ]}>
-          <p class="max-w-5xl mx-auto px-6 py-6">{config.footer?.content}</p>
+          ]}
+        >
+          <p class="mx-auto max-w-5xl p-6">{config.footer?.content}</p>
         </footer>
       )
     }
