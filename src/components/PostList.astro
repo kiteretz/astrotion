@@ -5,26 +5,37 @@ import { formatPostDate, postUrl } from "../lib";
 
 export type Props = {
   posts: Post[];
+  category?: string;
   page?: number;
   pageSize?: number;
   total?: number;
 };
 
-const { posts } = Astro.props;
+const { posts: rawPosts, category } = Astro.props;
+
+const posts = category
+  ? rawPosts.filter( p => p.category === category).slice(0,6)
+  : rawPosts
+
 ---
 
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
-  {
-    posts.map((p) => (
-      <Card
-        href={postUrl(p.slug)}
-        title={p.title}
-        image={p.featuredImage || p.cover}
-        date={formatPostDate(p.date)}
-        category={p.category}
-        tags={p.tags}
-        answer={p.answer}
-      />
-    ))
+<section>
+  { category && 
+    <h1>{category}</h1>
   }
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
+    {
+      posts.map((p) => (
+        <Card
+          href={postUrl(p.slug)}
+          title={p.title}
+          image={p.featuredImage || p.cover}
+          date={formatPostDate(p.date)}
+          category={p.category}
+          tags={p.tags}
+          answer={p.answer}
+        />
+      ))
+    }
+  </div>
 </section>
