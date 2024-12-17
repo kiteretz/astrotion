@@ -6,7 +6,8 @@ import config from "../config";
 import Layout from "../layouts/Layout.astro";
 import { client } from "../lib";
 
-const { database, pageCount, pageInt, posts } = await client.listPosts("1");
+const { pageCount, pageInt, posts } = await client.listPosts("1");
+const categories = await client.getAllCategories()
 ---
 
 <Layout>
@@ -29,8 +30,9 @@ const { database, pageCount, pageInt, posts } = await client.listPosts("1");
           {database.description}
         </p>
       </header> -->
-      <PostList posts={posts} />
-      <Pagination page={pageInt} pageCount={pageCount} />
+      { categories.map( cat =>
+        <PostList posts={posts} category={cat} />
+      )}
     </article>
   </main>
 </Layout>

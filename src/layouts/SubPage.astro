@@ -1,0 +1,27 @@
+---
+import config from "../config";
+import Layout from "../layouts/Layout.astro";
+
+export type Props = {
+  rssUrl: string
+};
+
+const { rssUrl } = Astro.props;
+
+---
+<Layout rssUrl={rssUrl}>
+  <main class="py-12 lg:py-20">
+    <article class="max-w-6xl mx-auto px-3">
+      <slot />
+    </article>
+  </main>
+</Layout>
+<style
+  define:vars={{
+    titleFontFamily: config.index?.titleFontFamily || "inherit",
+  }}
+>
+  .title {
+    font-family: var(--titleFontFamily);
+  }
+</style>

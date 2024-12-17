@@ -1,14 +1,14 @@
 ---
 import config from "../config";
 import { twMerge } from "tailwind-merge";
-import { client, getUrl } from "../lib";
+import { client } from "../lib";
 
 type Props = {
   className?: string;
 };
 
-const database = await client.getDatabase();
 const { className } = Astro.props;
+const allCategories = await client.getAllCategories()
 ---
 
 <nav class={twMerge("", config.nav?.classes, className)}>
@@ -22,25 +22,11 @@ const { className } = Astro.props;
     >
   </div> -->
   <ul class="text-[16px]/[1.25] flex items-center">
-    {
-      [
-        {
-          label: "HTML",
-          href: "#",
-        },
-        {
-          label: "CSS",
-          href: "#",
-        },
-        {
-          label: "JavaScript",
-          href: "#",
-        },
-      ].map(({ label, href }) => {
+    { allCategories.map((cat) => {
         return (
           <li class="flex justify-center items-center">
-            <a href={href} class="px-4 py-2.5">
-              {label}
+            <a href={`/category/${cat}/`} class="px-4 py-2.5">
+              {cat}
             </a>
           </li>
         );

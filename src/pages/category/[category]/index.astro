@@ -5,21 +5,21 @@ import SubPage from "../../../layouts/SubPage.astro";
 import { client } from "../../../lib";
 
 export async function getStaticPaths() {
-  const tags = await client.getAllTags();
-  return Array.from(tags).map((tag) => ({
-    params: { tag },
+  const cats = await client.getAllCategories();
+  return Array.from(cats).map((category) => ({
+    params: { category },
   }));
 }
 
-const { tag } = Astro.params;
+const { category } = Astro.params;
 const { pageCount, pageInt, posts } = await client.listPosts(
   "1",
-  (post) => post.tags.some((t) => t.name === tag),
+  (post) => post.category === category,
 );
 ---
 
-<SubPage rssUrl={`/tags/${tag}`}>
-  <header>{tag}</header>
+<SubPage rssUrl={`/category/${category}`}>
+  <header>{category}</header>
   <PostList posts={posts} />
-  <Pagination page={pageInt} pageCount={pageCount} base={`/tag/${tag}`} />
+  <Pagination page={pageInt} pageCount={pageCount} base={`/category/${category}`} />
 </SubPage>

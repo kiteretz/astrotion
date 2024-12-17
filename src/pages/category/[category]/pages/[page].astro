@@ -7,30 +7,29 @@ import { client } from "../../../../lib";
 
 export async function getStaticPaths() {
   const posts = await client.getAllPosts();
-  const tags = new Map<string, number>();
-  posts.forEach((post) =>
-    post.tags.forEach((tag) => {
-      tags.set(tag.name, (tags.get(tag.name) || 0) + 1);
-    }),
-  );
+  const cats = new Map<string, number>();
+  posts.forEach((post) => {
+      post.category &&
+      cats.set(post.category, (cats.get(post.category) || 0) + 1);
+  });
 
-  return Array.from(tags).flatMap(([name, count]) => {
+  return Array.from(cats).flatMap(([name, count]) => {
     const pageCount = Math.ceil(count / (config.postsPerPage || 20));
     return Array.from({ length: pageCount }, (_, i) => ({
-      params: { tag: name, page: (i + 1).toString() },
+      params: { category: name, page: (i + 1).toString() },
     }));
   });
 }
 
-const { page, tag } = Astro.params;
+const { page, category } = Astro.params;
 const { pageCount, pageInt, posts } = await client.listPosts(
   page || "1",
-  (post) => post.tags.some((t) => t.name === tag),
+  (post) => post.category === category,
 );
----
 
-<SubPage rssUrl={`/tags/${tag}`}>
-  <header>{tag}</header>
+---
+<SubPage rssUrl={`/category/${category}`}>
+  <header>{category}</header>
   <PostList posts={posts} />
-  <Pagination page={pageInt} pageCount={pageCount} base={`/tag/${tag}`} />
+  <Pagination page={pageInt} pageCount={pageCount} base={`/category/${category}`} />
 </SubPage>
