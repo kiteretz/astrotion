@@ -1,34 +1,18 @@
 ---
-import Pagination from "../components/Pagination.astro";
-import PostList from "../components/PostList.astro";
 import config from "../config";
 import Layout from "../layouts/Layout.astro";
-import type { Post } from "../lib/interfaces.ts";
 
 export type Props = {
-  taxonomy: string
-  term: string
-  siteTitle: string
-  pageInt: number
-  pageCount: number
-  posts: Post[]
+  rssUrl: string
 };
 
-const {
-  taxonomy,
-  term,
-  pageInt,
-  pageCount,
-  posts
-} = Astro.props;
+const { rssUrl } = Astro.props;
 
 ---
-<Layout rssUrl=`/${taxonomy}/${term}/rss.xml`>
+<Layout rssUrl={rssUrl}>
   <main class="py-12 lg:py-20">
     <article class="max-w-6xl mx-auto px-3">
-      <header>{term}</header>
-      <PostList posts={posts} />
-      <Pagination page={pageInt} pageCount={pageCount} base={`/${taxonomy}/${term}`} />
+      <slot />
     </article>
   </main>
 </Layout>

@@ -1,4 +1,6 @@
 ---
+import Pagination from "../../../../components/Pagination.astro";
+import PostList from "../../../../components/PostList.astro";
 import config from "../../../../config";
 import TaxonomyMain from "../../../../layouts/TaxonomyMain.astro";
 import { client } from "../../../../lib";
@@ -24,13 +26,10 @@ const { pageCount, pageInt, posts } = await client.listPosts(
   page || "1",
   (post) => post.category === category,
 );
----
 
-<TaxonomyMain
-  taxonomy={"category"}
-  term={category}
-  siteTitle={"hyacker"}
-  pageInt={pageInt}
-  pageCount={pageCount}
-  posts={posts}
-/>
+---
+<TaxonomyMain rssUrl={`/category/${category}`}>
+  <header>{category}</header>
+  <PostList posts={posts} />
+  <Pagination page={pageInt} pageCount={pageCount} base={`/category/${category}`} />
+</TaxonomyMain>
